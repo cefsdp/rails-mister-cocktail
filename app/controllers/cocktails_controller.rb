@@ -1,10 +1,11 @@
 class CocktailsController < ApplicationController
   def index
     @cocktails = Cocktail.all
+    puts(@cocktails)
   end
 
   def show
-    @cocktail = Cocktail.find(params[:cocktail_id])
+    @cocktail = Cocktail.find(params[:id])
   end
 
   def new
@@ -12,7 +13,7 @@ class CocktailsController < ApplicationController
   end
 
   def create
-    @cocktail = Cocktail.new(params[:cocktail])
+    @cocktail = Cocktail.new(cocktail_params)
     if @cocktail.save
       flash[:success] = 'Cocktail successfully created'
       redirect_to @cocktail
