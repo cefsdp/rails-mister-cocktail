@@ -6,7 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Ingredient.create(name: "lemon")
-Ingredient.create(name: "ice")
-Ingredient.create(name: "mint leaves")
-Cocktail.create(name: "Tested Cocktail")
+url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
+serial = open(url).read
+data = JSON.parse(serial)['drinks']
+data.each do |datum|
+  Ingredient.create(name: datum['strIngredient1'])
+end
